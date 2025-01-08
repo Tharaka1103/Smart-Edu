@@ -1,101 +1,72 @@
-import Image from "next/image";
-
+import { routes, renderContent } from '@/app/resources'
+import Header from './Components/Header'
+import Footer from './Components/Footer'
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const content = renderContent('home, about')
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+  return <>
+    <Header />
+    <main className="min-h-screen bg-background pt-1">
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center px-4 mt-5">
+        <div className="max-w-4xl text-center space-y-8">
+          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-green-500 to-emerald-800 bg-clip-text text-transparent">
+            {content.home.title}
+          </h1>
+          
+          <h2 className="text-3xl md:text-4xl font-semibold text-foreground/90">
+            {content.home.heading}
+          </h2>
+          
+          <p className="text-lg md:text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
+            {content.home.text}
+          </p>
+
           <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={content.home.button.link}
+            className="inline-block px-8 py-4 text-lg font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+            {content.home.button.text}
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+
+        {/* Decorative Elements */}
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(45%_45%_at_50%_50%,rgba(34,197,94,0.1),rgba(255,255,255,0))]" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
+      </section>
+
+      {/* Features Grid */}
+      <section className="px-4 py-20 bg-background/50">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              title: "Comprehensive Coverage",
+              description: "Access complete study materials for all O/L subjects"
+            },
+            {
+              title: "Interactive Learning",
+              description: "Engage with dynamic content and practice exercises"
+            },
+            {
+              title: "Expert Guidance",
+              description: "Learn from experienced teachers and professionals"
+            }
+          ].map((feature, index) => (
+            <div 
+              key={index}
+              className="p-6 rounded-xl bg-foreground/5 backdrop-blur-sm hover:bg-foreground/10 transition-all duration-300"
+            >
+              <h3 className="text-xl font-semibold mb-3 text-foreground/90">
+                {feature.title}
+              </h3>
+              <p className="text-foreground/70">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </>
 }
