@@ -3,12 +3,13 @@
   import React, { useState } from 'react';
   import Link from 'next/link';
   import Image from 'next/image';
+  import { ThemeSwitch } from './ThemeSwitch'
 
   const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-      <header className="fixed w-full bg-white/50 backdrop-blur-sm shadow-lg z-50">
+      <header className="fixed w-full bg-background backdrop-blur-sm shadow-lg z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -25,30 +26,28 @@
 
             {/* Navigation */}
             <nav className="hidden md:flex space-x-6 text-xl">
-              <Link href="/" className="text-sm font-bold text-gray-700 hover:text-blue-600 transition-all hover:scale-105">
+              <Link href="/" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
                 Home
               </Link>
-              <Link href="/courses" className="text-sm font-bold text-gray-700 hover:text-blue-600 transition-all hover:scale-105">
+              <Link href="/courses" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
                 Courses
               </Link>
-              <Link href="/teachers" className="text-sm font-bold text-gray-700 hover:text-blue-600 transition-all hover:scale-105">
+              <Link href="/teachers" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
                 Teachers
               </Link>
-              <Link href="/about" className="text-sm font-bold text-gray-700 hover:text-blue-600 transition-all hover:scale-105">
+              <Link href="/about" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
                 About
               </Link>
-              <Link href="/contact" className="text-sm font-bold text-gray-700 hover:text-blue-600 transition-all hover:scale-105">
+              <Link href="/contact" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
                 Contact
               </Link>
             </nav>
             {/* Auth Buttons */}
             <div className="hidden md:flex items-center space-x-3">
-              <Link href="/login" className="text-sm font-bold px-3 py-1.5 text-gray-700 hover:text-blue-600 transition-all hover:scale-105">
+              <Link href="/login" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
                 Login
               </Link>
-              <Link href="/register" className="text-sm px-3 py-1.5 bg-green-600 text-white rounded-full hover:bg-blue-700 transition-all hover:scale-105 active:scale-95">
-                Register
-              </Link>
+              <ThemeSwitch />
             </div>
 
             {/* Mobile Menu Button */}
@@ -71,7 +70,7 @@
           {isMenuOpen && (
             <div className="md:hidden py-4 space-y-4">
               <nav className="flex flex-col space-y-2">
-                <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors px-2 py-1.5 hover:bg-gray-50 rounded-lg">
+                <Link href="/" className="text-gray-700 hover:text-green-700 transition-colors px-2 py-1.5 hover:bg-gray-50 rounded-lg">
                   Home
                 </Link>
                 <Link href="/courses" className="text-gray-700 hover:text-blue-600 transition-colors px-2 py-1.5 hover:bg-gray-50 rounded-lg">
