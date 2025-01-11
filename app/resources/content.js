@@ -480,4 +480,103 @@ const categories = {
         }
       }
 }
-export { home, about, blog, contact, classes, teachers, categories };
+
+const users = {
+    user1: {
+        userId: 1,
+        name: "Kamal Perera",
+        role: "student",
+        grade: "11",
+        school: "Royal College",
+        email: "kamal@example.com",
+        avatar: "/avatars/student1.jpg",
+        status: "online",
+        lastSeen: "2024-01-20T10:30:00",
+        groups: ["group1", "group2"]
+    },
+    user2: {
+        userId: 2,
+        name: "Nimal Silva",
+        role: "student",
+        grade: "11",
+        school: "Ananda College",
+        email: "nimal@example.com",
+        avatar: "/avatars/student2.jpg",
+        status: "offline",
+        lastSeen: "2024-01-20T09:15:00",
+        groups: ["group1"]
+    },
+    user3: {
+        userId: 3,
+        name: "Sunil Fernando",
+        role: "student",
+        grade: "10",
+        school: "Nalanda College",
+        email: "sunil@example.com",
+        avatar: "/avatars/student3.jpg",
+        status: "online",
+        lastSeen: "2024-01-20T10:45:00",
+        groups: ["group2"]
+    },
+    user4: {
+        userId: 4,
+        name: "Malini Dissanayake",
+        role: "student",
+        grade: "11",
+        school: "Visakha Vidyalaya",
+        email: "malini@example.com",
+        avatar: "/avatars/student4.jpg",
+        status: "online",
+        lastSeen: "2024-01-20T11:00:00",
+        groups: ["group1", "group3"]
+    },
+    user5: {
+        userId: 5,
+        name: "Kumari Rathnayake",
+        role: "student",
+        grade: "10",
+        school: "Devi Balika Vidyalaya",
+        email: "kumari@example.com",
+        avatar: "/avatars/student5.jpg",
+        status: "offline",
+        lastSeen: "2024-01-20T08:45:00",
+        groups: ["group2"]
+    },
+    user6: {
+        userId: 6,
+        name: "Chamara Bandara",
+        role: "student",
+        grade: "11",
+        school: "D.S. Senanayake College",
+        email: "chamara@example.com",
+        avatar: "/avatars/student6.jpg",
+        status: "online",
+        lastSeen: "2024-01-20T10:55:00",
+        groups: ["group1"]
+    },
+    user7: {
+        userId: 7,
+        name: "Dilini Jayawardena",
+        role: "student",
+        grade: "10",
+        school: "Musaeus College",
+        email: "dilini@example.com",
+        avatar: "/avatars/student7.jpg",
+        status: "online",
+        lastSeen: "2024-01-20T11:15:00",
+        groups: ["group3"]
+    },
+    user8: {
+        userId: 8,
+        name: "Sanduni Perera",
+        role: "student",
+        grade: "11",
+        school: "Methodist College",
+        email: "sanduni@example.com",
+        avatar: "/avatar/women.jpg",
+        status: "offline",
+        lastSeen: "2024-01-20T09:30:00",
+        groups: ["group2", "group3"]
+    }
+};
+export { home, about, blog, contact, classes, teachers, categories, users };

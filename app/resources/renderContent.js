@@ -1,4 +1,4 @@
-import { home, about, blog, contact, classes, teachers, categories } from './content';
+import { home, about, blog, contact, classes, teachers, categories, users } from './content';
 
 const renderContent = (t) => {
     return {
@@ -8,7 +8,8 @@ const renderContent = (t) => {
         contact,
         classes,
         teachers,
-        categories
+        categories,
+        users
     }
 };
 
