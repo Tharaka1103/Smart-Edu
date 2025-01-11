@@ -124,7 +124,7 @@ export default function AnimatedGridPattern({
       <svg x={x} y={y} className="overflow-visible">
         {squares.map(({ pos: [x, y], id }, index) => (
           <motion.rect
-            initial={{ opacity: 1 }}
+            initial={{ opacity: 0.3 }}
             animate={{ opacity: maxOpacity }}
             transition={{
               duration,
