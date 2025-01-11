@@ -29,12 +29,15 @@
               <Link href="/" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
                 Home
               </Link>
-              <Link href="/courses" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
-                Courses
+              <Link href="/classes" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
+                Classes
               </Link>
               <Link href="/teachers" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
                 Teachers
-              </Link>
+              </Link>            
+              <Link href="/categories" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
+                Categories
+              </Link>             
               <Link href="/about" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
                 About
               </Link>

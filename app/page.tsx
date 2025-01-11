@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { cn } from "@/app/lib/utils";
 import AnimatedGradientText from "@/app/Components/magicui/AnimatedGradientText";
 import SparklesText from './Components/magicui/SparklesText';
- 
+import AnimatedGridPattern from "@/app/Components/magicui/AnimatedGridPattern";
+
 export default function Home() {
   const content = renderContent('home, about')
 
@@ -38,10 +39,16 @@ export default function Home() {
             </Link>
           </div>
         </div>
-
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(45%_45%_at_50%_50%,rgba(34,197,94,0.1),rgba(255,255,255,0))]" />
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
+        <AnimatedGridPattern
+          numSquares={30}
+          maxOpacity={0.1}
+          duration={3}
+          repeatDelay={1}
+          className={cn(
+            "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]",
+            "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
+          )}
+        />
       </section>
 
       {/* Features Grid */}
