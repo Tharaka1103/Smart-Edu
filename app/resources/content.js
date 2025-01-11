@@ -1,3 +1,5 @@
+import { a } from "framer-motion/client"
+
 const home = {
     title: 'Welcome to Sri Lankan O/L Education Hub',
     heading: 'Your Complete O/L Preparation Platform',
@@ -6,6 +8,59 @@ const home = {
         text: 'Start Learning',
         link: '/classroom'
     },
+    features: [
+        {
+            title: 'Subject-wise Coverage',
+            description: 'Detailed coverage of all O/L subjects including Mathematics, Science, English, History, and more.'
+        },
+        {
+            title: 'Past Paper Discussions',
+            description: 'Discuss and analyze past papers to understand the exam pattern and improve your performance.'
+        },
+        {
+            title: 'Model Question Papers',
+            description: 'Practice with model question papers to prepare for the O/L exams.'
+        },
+        {
+            title: 'Interactive Learning Materials',
+            description: 'Interactive video lessons, audio lessons, and notes to enhance your learning experience.'
+        }
+    ],
+    about: {
+        title: 'About Us',
+        text: 'We are a dedicated team of experienced teachers and education professionals committed to improving O/L education in Sri Lanka. Our platform combines traditional teaching methods with modern technology to provide an effective learning experience. We focus on all core O/L subjects including Mathematics, Science, English, History, and more, ensuring every student has access to quality education regardless of their location.',
+        button: {
+            text: 'Learn more',
+            link: '/about'
+        }
+    },
+    blog: {
+        title: 'Education Blog',
+        heading: 'O/L Exam Updates & Study Tips',
+        text: 'Stay updated with the latest O/L exam updates and study tips to help you succeed in your O/L exams. Our blog provides valuable insights and strategies to help you excel in your O/L preparation.',
+        button: {
+            text: 'Read More',
+            link: '/blog'
+        }
+    },
+    services: {
+      title: 'Our Services',
+        heading: 'Unlock Your O/L Potential',
+        text: 'Our services are designed to help you excel in your O/L exams. From subject-wise coverage to interactive learning materials, we provide the tools and resources you need to succeed. Join thousands of students who have already benefited from our platform and take the first step towards achieving your O/L goals.',
+        button: {
+            text: 'Learn More',
+            link: '/services'
+        }
+    },
+    contact: {
+        title: 'Contact Us',
+        heading: 'Get in Touch',
+        text: 'Have questions or need assistance? Reach out to us through the contact form or email us at info@oleducationhub.com. We are here to help you with any inquiries or concerns you may have.',
+        button: {
+            text: 'Contact Us',
+            link: '/contact'
+        }
+    }
 }
 const about = {
     title: 'About us',

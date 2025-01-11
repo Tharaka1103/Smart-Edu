@@ -5,6 +5,7 @@ import { FiSearch, FiMoreVertical, FiSend } from 'react-icons/fi';
 import { FaUsers, FaUserPlus, FaSmile, FaBan, FaDownload, FaImage, FaTrash, FaUser, FaEnvelope, FaGraduationCap, FaMapMarkerAlt, FaPhone, FaSchool, FaTimes  } from 'react-icons/fa';
 import { users } from '@/app/resources/content';
 import EmojiPicker from 'emoji-picker-react';
+import chatFunctions from '../resources/chatFunctions';
 
 interface Message {
   id: string;
@@ -13,11 +14,19 @@ interface Message {
   text: string;
   timestamp: string;
 }
-
+interface Group {
+  id: string;
+  name: string;
+  members: string[];
+  createdBy: number;
+  createdAt: string;
+  lastMessage?: string;
+}
 export default function MessagesPage() {
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
+  const [groups, setGroups] = useState<Group[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [showNewChat, setShowNewChat] = useState(false);
   const [showGroupCreate, setShowGroupCreate] = useState(false);
@@ -55,10 +64,31 @@ export default function MessagesPage() {
   };
 
   const createGroup = () => {
-    // Implement group creation logic
-    console.log('Group created:', { name: groupName, members: selectedMembers });
+    console.log('Creating group:', groupName, selectedMembers);
+    if (!groupName.trim() || selectedMembers.length === 0) {
+      return;
+    }
+  
+    const newGroup = chatFunctions.createGroup(groupName, selectedMembers, currentUser);
+    
+    // Add first group message
+    const welcomeMessage = {
+      id: Date.now().toString(),
+      senderId: currentUser.userId,
+      groupId: newGroup.groupId,
+      text: `Group "${groupName}" created`,
+      timestamp: new Date().toISOString(),
+      type: 'system'
+    };
+  
+    setGroups(prevGroups => [...prevGroups, { ...newGroup, id: newGroup.groupId, createdBy: newGroup.creator }]);
+    setMessages(prevMessages => [...prevMessages, welcomeMessage as unknown as Message]);
+    setSelectedUser({ ...newGroup, isGroup: true });
+    setGroupName('');
+    setSelectedMembers([]);
     setShowGroupCreate(false);
   };
+  
 
   return (
     <div className="min-h-screen bg-background pt-16">
@@ -75,15 +105,17 @@ export default function MessagesPage() {
                 >
                   <FaUserPlus />
                 </button>
-                <button 
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => setShowGroupCreate(true)}
                   className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <FaUsers />
-                </button>
+                </motion.button>
               </div>
             </div>
-
+            
             <div className="relative mb-4">
               <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
@@ -94,7 +126,34 @@ export default function MessagesPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-
+{/* Groups Section */}
+{groups.length > 0 && (
+              <div className="mb-4">
+                <h3 className="text-sm font-semibold text-gray-500 mb-2">Groups</h3>
+                <div className="space-y-2">
+                  {groups.map(group => (
+                    <motion.div
+                      key={group.id}
+                      whileHover={{ scale: 1.02 }}
+                      className="p-3 rounded-xl cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
+                      onClick={() => setSelectedUser({ ...group, isGroup: true })}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center text-white">
+                          {group.name[0]}
+                        </div>
+                        <div>
+                          <h3 className="font-semibold">{group.name}</h3>
+                          <p className="text-sm text-gray-500">
+                            {group.members.length} members
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="space-y-2 overflow-y-auto h-[calc(80vh-120px)]">
               {recentChats.map((user) => (
                 <motion.div
@@ -342,74 +401,90 @@ export default function MessagesPage() {
         </div>
       )}
 
-      {/* Create Group Modal */}
+      {/* Group Creation Modal */}
       {showGroupCreate && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-md"
-          >
-            <h2 className="text-xl font-bold mb-4">Create Group</h2>
-            <div className="space-y-4">
-              <input
-                type="text"
-                placeholder="Group name"
-                className="w-full p-3 rounded-xl bg-gray-100 dark:bg-gray-700"
-                value={groupName}
-                onChange={(e) => setGroupName(e.target.value)}
-              />
-              <div className="max-h-60 overflow-y-auto">
-                {Object.values(users)
-                  .filter(user => user.userId !== currentUser.userId)
-                  .map(user => (
-                    <div
-                      key={user.userId}
-                      onClick={() => {
-                        setSelectedMembers(prev => 
-                          prev.includes(user.userId.toString())
-                            ? prev.filter(id => id !== user.userId.toString())
-                            : [...prev, user.userId.toString()]
-                        );
-                      }}
-                      className="p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl cursor-pointer"
-                    >
-                      <div className="flex items-center gap-3">
-                        <input
-                          type="checkbox"
-                          checked={selectedMembers.includes(user.userId.toString())}
-                          onChange={() => {}}
-                          className="rounded text-blue-500"
-                        />
-                        <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-800 flex items-center justify-center">
-                          {user.name[0]}
-                        </div>
-                        <div>
-                          <h3 className="font-semibold">{user.name}</h3>
-                          <p className="text-sm text-gray-500">{user.school}</p>
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-md m-4">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">Create New Group</h2>
+              <button 
+                onClick={() => setShowGroupCreate(false)}
+                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
+              >
+                <FaTimes />
+              </button>
+            </div>
+
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              createGroup();
+            }}>
+              <div className="space-y-4">
+                <label className='text-foreground' htmlFor="">Group Name <span className='text-red-800 font-bold'>*</span></label>
+                <input
+                  type="text"
+                  placeholder="Group name"
+                  className="w-full p-3 rounded-xl bg-gray-100 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500"
+                  value={groupName}
+                  onChange={(e) => setGroupName(e.target.value)}
+                />
+
+                <div className="max-h-60 overflow-y-auto custom-scrollbar">
+                  {Object.values(users)
+                    .filter(user => user.userId !== currentUser.userId)
+                    .map(user => (
+                      <div
+                        key={user.userId}
+                        onClick={() => {
+                          setSelectedMembers(prev =>
+                            prev.includes(user.userId.toString())
+                              ? prev.filter(id => id !== user.userId.toString())
+                              : [...prev, user.userId.toString()]
+                          );
+                        }}
+                        className="p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl cursor-pointer"
+                      >
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="checkbox"
+                            checked={selectedMembers.includes(user.userId.toString())}
+                            onChange={() => {}}
+                            className="rounded text-blue-500"
+                          />
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white">
+                            {user.name[0]}
+                          </div>
+                          <div>
+                            <h3 className="font-semibold">{user.name}</h3>
+                            <p className="text-sm text-gray-500">{user.school}</p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                </div>
+
+                <div className="flex gap-2 pt-4">
+                  <button
+                    type="submit"
+                    className="flex-1 p-3 bg-blue-500 text-white rounded-xl hover:bg-blue-600 disabled:opacity-50 transition-colors"
+                    disabled={!groupName.trim() || selectedMembers.length === 0}
+                  >
+                    Create Group
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowGroupCreate(false)}
+                    className="flex-1 p-3 bg-gray-100 dark:bg-gray-700 rounded-xl"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={createGroup}
-                  className="flex-1 p-3 bg-blue-500 text-white rounded-xl hover:bg-blue-600"
-                >
-                  Create Group
-                </button>
-                <button
-                  onClick={() => setShowGroupCreate(false)}
-                  className="flex-1 p-3 bg-gray-100 dark:bg-gray-700 rounded-xl"
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </motion.div>
+            </form>
+          </div>
         </div>
       )}
+
 
         {showProfile && selectedUser && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
@@ -523,7 +598,6 @@ export default function MessagesPage() {
             </motion.div>
         </div>
         )}
-
     </div>
   );
 }
