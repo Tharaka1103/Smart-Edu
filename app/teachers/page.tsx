@@ -6,6 +6,7 @@ import { FaChalkboardTeacher, FaStar, FaGraduationCap, FaTimes } from 'react-ico
 import { useTheme } from "next-themes";
 import Link from 'next/link';
 import { teachers } from '@/app/resources/content';
+import { Button } from '@/components/ui/button';
 
 export default function TeachersPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -36,13 +37,13 @@ export default function TeachersPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-background">
       <main className="max-w-7xl mx-auto px-4 py-20">
         <h1 className="text-4xl font-bold text-center mb-12">Our Expert Teachers</h1>
         
         <div className="flex flex-col md:flex-row gap-8">
           {/* Sidebar Filters */}
-          <aside className={`md:w-64 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg 
+          <aside className={`md:w-64 bg-card p-6 rounded-2xl shadow-lg 
             ${showFilters ? 'fixed inset-0 z-50 md:relative' : 'hidden md:block'}`}>
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold">Filters</h2>
@@ -79,7 +80,7 @@ export default function TeachersPage() {
                 <select
                   value={experienceFilter}
                   onChange={(e) => setExperienceFilter(e.target.value)}
-                  className="w-full p-2 rounded-lg border dark:bg-gray-700"
+                  className="w-full p-2 rounded-lg border bg-card"
                 >
                   <option value="all">All Experience</option>
                   <option value="5+">5+ Years</option>
@@ -97,18 +98,18 @@ export default function TeachersPage() {
                 <input
                   type="text"
                   placeholder="Search teachers by name or subject..."
-                  className="w-full pl-12 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-blue-500 dark:bg-gray-700"
+                  className="w-full pl-12 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-blue-500 bg-card"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
-              <button
+              <Button
                 onClick={() => setShowFilters(true)}
-                className="md:hidden flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-xl"
+                className=""
               >
                 <FiFilter />
                 Filters
-              </button>
+              </Button>
             </div>
 
             {/* Teachers Grid */}
@@ -117,7 +118,7 @@ export default function TeachersPage() {
                 <motion.div
                   key={key}
                   whileHover={{ scale: 1.02 }}
-                  className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden"
+                  className="bg-card rounded-2xl shadow-lg overflow-hidden"
                 >
                   <div className="p-6">
                     <div className="flex items-center gap-4 mb-4">
@@ -128,7 +129,7 @@ export default function TeachersPage() {
                         <h3 className="text-xl font-bold">{teacher.name}</h3>
                         <div className="flex flex-wrap gap-1">
                           {teacher.subject.map((sub, index) => (
-                            <span key={index} className="text-sm px-2 py-1 bg-blue-100 dark:bg-blue-900 rounded-full">
+                            <span key={index} className="text-sm px-2 py-1 bg-ring rounded-full">
                               {sub}
                             </span>
                           ))}
@@ -147,12 +148,12 @@ export default function TeachersPage() {
                       </div>
                     </div>
 
-                    <p className="mt-4 text-gray-600 dark:text-gray-300 line-clamp-2">{teacher.bio}</p>
+                    <p className="mt-4 text-text-foreground line-clamp-2">{teacher.bio}</p>
 
                     <Link href={teacher.button.link} className="block mt-6">
-                      <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl transition-colors">
+                      <Button className="w-full">
                         {teacher.button.text}
-                      </button>
+                      </Button>
                     </Link>
                   </div>
                 </motion.div>

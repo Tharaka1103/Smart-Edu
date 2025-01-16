@@ -6,6 +6,14 @@ import { useTheme } from "next-themes";
 import { FaChalkboardTeacher, FaCalendarAlt, FaClock, FaUsers, FaBook } from 'react-icons/fa';
 import { BsStarFill } from 'react-icons/bs';
 import { classes } from '@/app/resources/content';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 
 export default function ClassDetails({ params }: { params: Promise<{ classId: string }> }) {
   const [enrollmentStep, setEnrollmentStep] = useState(1);
@@ -51,19 +59,34 @@ export default function ClassDetails({ params }: { params: Promise<{ classId: st
     <div className="min-h-screen bg-background">
       
       <main className="max-w-7xl mx-auto px-4 py-20">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/classes">Classes</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{classData.title}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
         {/* Hero Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden"
+          className="bg-card rounded-3xl shadow-xl overflow-hidden mt-2"
         >
           <div className="p-8 md:p-12">
             <div className="grid md:grid-cols-2 gap-12">
               <div>
                 <h1 className="text-4xl font-bold mb-4">{classData.title}</h1>
-                <p className="text-gray-600 dark:text-gray-300 mb-6">{classData.description}</p>
+                <p className="text-text-foreground mb-6">{classData.description}</p>
                 <div className="flex items-center gap-4 mb-8">
-                  <span className="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full">
+                  <span className="px-4 py-2 bg-primary text-text rounded-full">
                     {classData.exam}
                   </span>
                   <div className="flex items-center">
@@ -71,13 +94,13 @@ export default function ClassDetails({ params }: { params: Promise<{ classId: st
                     <span>{classData.rating} ({classData.reviews} reviews)</span>
                   </div>
                 </div>
-                <div className="text-2xl font-bold text-blue-600">{classData.price}</div>
+                <div className="text-2xl font-bold text-primary">{classData.price}</div>
               </div>
               
               <div className="space-y-6">
                 {classData.features.map((feature: { title: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; description: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }, index: Key | null | undefined) => (
                   <div key={index} className="flex items-start gap-4">
-                    <FaBook className="text-blue-600 text-2xl flex-shrink-0" />
+                    <FaBook className="text-primary text-2xl flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold">{feature.title}</h3>
                       <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
@@ -93,19 +116,19 @@ export default function ClassDetails({ params }: { params: Promise<{ classId: st
         <div className="grid md:grid-cols-3 gap-8 mt-8">
           <div className="md:col-span-2 space-y-8">
             {/* Schedule */}
-            <section className="bg-white dark:bg-gray-800 rounded-3xl p-8">
+            <section className="bg-card rounded-3xl p-8">
               <h2 className="text-2xl font-bold mb-6">Class Schedule</h2>
               <div className="space-y-4">
                 {classData.schedule.map((schedule: { day: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; time: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; type: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }, index: Key | null | undefined) => (
-                  <div key={index} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                  <div key={index} className="flex items-center justify-between p-4 bg-background rounded-xl">
                     <div className="flex items-center gap-4">
-                      <FaCalendarAlt className="text-blue-600" />
+                      <FaCalendarAlt className="text-primary" />
                       <div>
                         <p className="font-semibold">{schedule.day}</p>
                         <p className="text-sm text-gray-600 dark:text-gray-300">{schedule.time}</p>
                       </div>
                     </div>
-                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full text-sm">
+                    <span className="px-3 py-1 bg-primary text-rext rounded-full text-sm">
                       {schedule.type}
                     </span>
                   </div>
@@ -114,7 +137,7 @@ export default function ClassDetails({ params }: { params: Promise<{ classId: st
             </section>
 
             {/* Syllabus */}
-            <section className="bg-white dark:bg-gray-800 rounded-3xl p-8">
+            <section className="bg-card rounded-3xl p-8">
               <h2 className="text-2xl font-bold mb-6">Course Syllabus</h2>
               <div className="space-y-4">
                 {classData.syllabus.map((item: { week: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; topic: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; duration: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }, index: Key | null | undefined) => (
@@ -136,14 +159,14 @@ export default function ClassDetails({ params }: { params: Promise<{ classId: st
           <div className="md:col-span-1">
             <div className="sticky top-24">
               <motion.div 
-                className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl"
+                className="bg-card rounded-3xl p-6 shadow-xl"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
               >
                 <h2 className="text-2xl font-bold mb-6">Enroll Now</h2>
                 {/* Added benefits section */}
-                <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-xl">
-                  <h3 className="font-semibold text-blue-600 dark:text-blue-400 mb-2">Why Enroll?</h3>
+                <div className="mb-6 p-4 bg-card rounded-xl">
+                  <h3 className="font-semibold text-primary mb-2">Why Enroll?</h3>
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-center gap-2">
                       <span className="text-green-500">✓</span> Expert instructors
@@ -164,7 +187,7 @@ export default function ClassDetails({ params }: { params: Promise<{ classId: st
                         <div
                           key={step}
                           className={`w-3 h-3 rounded-full ${
-                            step <= enrollmentStep ? 'bg-blue-600' : 'bg-gray-300'
+                            step <= enrollmentStep ? 'bg-primary' : 'bg-gray-300'
                           }`}
                         />
                       ))}

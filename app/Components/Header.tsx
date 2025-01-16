@@ -1,15 +1,26 @@
   "use client"
 
-  import React, { useState } from 'react';
+  import React, { useState, useEffect  } from 'react';
   import Link from 'next/link';
   import Image from 'next/image';
   import { ThemeSwitch } from './ThemeSwitch'
 
   const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [username, setUsername] = useState('');
+  
+    useEffect(() => {
+      const adminToken = localStorage.getItem('adminToken');
+      if (adminToken) {
+        setIsLoggedIn(true);
+        const email = atob(adminToken).split(':')[0];
+        setUsername(email);
+      }
+    }, []);
 
     return (
-      <header className="fixed w-full bg-background backdrop-blur-sm shadow-lg z-50">
+      <header className="fixed w-full bg-transparent backdrop-blur-sm shadow-lg z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -47,9 +58,15 @@
             </nav>
             {/* Auth Buttons */}
             <div className="hidden md:flex items-center space-x-3">
-              <Link href="/login" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
-                Login
-              </Link>
+              {isLoggedIn ? (
+                <Link href="/admin" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
+                  {username}
+                </Link>
+              ) : (
+                <Link href="/login" className="text-sm font-bold text-card-foreground hover:text-green-700 transition-all hover:scale-150">
+                  Login
+                </Link>
+              )}
               <ThemeSwitch />
             </div>
 

@@ -6,6 +6,15 @@ import { FaChalkboardTeacher, FaTimes } from 'react-icons/fa';
 import { BsBook, BsStarFill } from 'react-icons/bs';
 import { useTheme } from "next-themes";
 import { classes } from '@/app/resources/content';
+import { Button } from '@/components/ui/button';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 
 export default function ClassesPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,11 +37,22 @@ export default function ClassesPage() {
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-7xl mx-auto px-4 py-20">
-        <div className="flex flex-col md:flex-row gap-8">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/classes">Classes</BreadcrumbLink>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        <div className="flex flex-col md:flex-row gap-8 mt-2">
           {/* Sidebar Filters */}
-          <aside className={`md:w-64 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg ${showFilters ? 'fixed inset-0 z-50 md:relative' : 'hidden md:block'}`}>
+          <aside className={`md:w-64 bg-card p-6 rounded-2xl shadow-lg ${showFilters ? 'fixed inset-0 z-50 md:relative' : 'hidden md:block'}`}>
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold">Filters</h2>
+              <h2 className="text-xl txt-text font-bold">Filters</h2>
               <button onClick={() => setShowFilters(false)} className="md:hidden">
                 <FaTimes />
               </button>
@@ -41,11 +61,11 @@ export default function ClassesPage() {
             <div className="space-y-6">
               <div>
                 <h3 className="font-semibold mb-3">Exam Type</h3>
-                <select 
+                <select
                   value={selectedExam}
                   onChange={(e) => setSelectedExam(e.target.value)}
-                  className="w-full p-2 rounded-lg border"
-                >
+                  className="w-full p-2 rounded-lg border bg-card"
+                > 
                   <option value="all">All Exams</option>
                   <option value="O/L">O/L</option>
                   <option value="A/L">A/L</option>
@@ -84,7 +104,7 @@ export default function ClassesPage() {
                 <input
                   type="text"
                   placeholder="Search classes..."
-                  className="w-full pl-12 pr-4 py-3 bg-background rounded-xl border focus:ring-2 focus:ring-blue-500"
+                  className="w-full pl-12 pr-4 py-3 bg-card rounded-xl border focus:ring-2 focus:ring-blue-500"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -104,18 +124,18 @@ export default function ClassesPage() {
                 <motion.div
                   key={key}
                   whileHover={{ scale: 1.02 }}
-                  className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden"
+                  className="bg-card rounded-2xl shadow-lg overflow-hidden"
                 >
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-2">{classItem.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">{classItem.description}</p>
+                    <p className="text-text mb-4">{classItem.description}</p>
                     <div className="mt-4">
-                      <button 
+                      <Button 
                         onClick={() => window.location.href = classItem.button.link}
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl transition-colors"
+                        className="w-full"
                       >
                         {classItem.button.text}
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </motion.div>

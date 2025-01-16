@@ -133,9 +133,10 @@ export default function Home() {
         </div>
       </section>
 
-      <ImageSlider />
       {/* Blog Section */}
       <section className="py-20 bg-background">
+        
+      <ImageSlider />
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4 text-foreground">{content.blog.title}</h2>

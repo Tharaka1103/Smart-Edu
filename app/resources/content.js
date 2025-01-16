@@ -110,7 +110,7 @@ const features = {
 const classes = {
     class1: {
       classId: 1,
-      title: "Mathematics",
+      title: "ගණිතය",
       description: "Learn the fundamentals of mathematics and prepare for the O/L Mathematics exam",
       exam: "O/L",
       teacher: "Mr. Perera",
@@ -140,7 +140,7 @@ const classes = {
     },
     class2: {
       classId: 2,
-      title: "History",
+      title: "ඉතිහාසය",
       description: "Explore Sri Lankan and World History for O/L examination success",
       exam: "O/L",
       teacher: "Mrs. Silva",
@@ -480,61 +480,98 @@ const teachers = {
 }
 
 const categories = {
-    category1: {
-      categoryId: 1,
-      name: "Past papers",
-      description: "Access a wide range of past papers for comprehensive preparation.",
-      button: {
-        text: "View Category",
-        link: "/categories/1"
-      }
-    },
-    category2: {
-      categoryId: 2,
-      name: "Mock papers",
-      description: "Practice with mock papers to gauge your readiness for exams.",
-      button: {
-        text: "View Category",
-        link: "/categories/2"
-      }
-    },
-    category3: {
-      categoryId: 3,
-      name: "Video lessons",
-      description: "Interactive video lessons for a dynamic learning experience.",
-      button: {
-        text: "View Category",
-        link: "/categories/3"
-      }
-    },
-    category4: {
-      categoryId: 4,
-      name: "Audio lessons",
-      description: "Enhance your learning with audio lessons for various subjects.",
-      button: {
-        text: "View Category",
-        link: "/categories/4"
-      }
-    },
-    category5: {
-      categoryId: 5,
-      name: "Notes",
-      description: "Comprehensive notes for in-depth understanding of subjects.",
-      button: {
-        text: "View Category",
-        link: "/categories/5"
-      }
-    },
-    category6: {
-        categoryId: 6,
-        name: "Addons",
-        description: "Add extara categories in app/resources/content.js. and also update renderContent.js",
-        button: {
-          text: "Test",
-          link: "#"
-        }
-      }
+  category1: {
+    categoryId: 1,
+    name: "Past papers",
+    description: "Access a wide range of past papers for comprehensive preparation.",
+    subjects: ["Mathematics", "Physics", "Chemistry", "Biology", "ICT"],
+    years: ["2019-2023", "2014-2018", "2009-2013", "2004-2008"],
+    features: ["Detailed Solutions", "Mark Schemes", "Examiner Reports", "Grade Boundaries"],
+    formats: ["PDF", "Word", "Interactive Digital"],
+    languages: ["English", "Sinhala", "Tamil"],
+    difficulty: ["Basic", "Intermediate", "Advanced"],
+    button: {
+      text: "View Category",
+      link: "/categories/1"
+    }
+  },
+  category2: {
+    categoryId: 2,
+    name: "Mock papers",
+    description: "Practice with mock papers to gauge your readiness for exams.",
+    subjects: ["Mathematics", "Physics", "Chemistry", "Biology", "ICT"],
+    years: ["2019-2023", "2014-2018", "2009-2013", "2004-2008"],
+    features: ["Detailed Solutions", "Mark Schemes", "Examiner Reports", "Grade Boundaries"],
+    formats: ["PDF", "Word", "Interactive Digital"],
+    languages: ["English", "Sinhala", "Tamil"],
+    difficulty: ["Basic", "Intermediate", "Advanced"],
+    button: {
+      text: "View Category",
+      link: "/categories/2"
+    }
+  },
+  category3: {
+    categoryId: 3,
+    name: "Video lessons",
+    description: "Interactive video lessons for a dynamic learning experience.",
+    subjects: ["Mathematics", "Physics", "Chemistry", "Biology", "ICT"],
+    years: ["2019-2023", "2014-2018", "2009-2013", "2004-2008"],
+    features: ["HD Quality", "Downloadable", "Subtitles", "Chapter Markers"],
+    formats: ["MP4", "WebM", "Streaming"],
+    languages: ["English", "Sinhala", "Tamil"],
+    difficulty: ["Basic", "Intermediate", "Advanced"],
+    button: {
+      text: "View Category",
+      link: "/categories/3"
+    }
+  },
+  category4: {
+    categoryId: 4,
+    name: "Audio lessons",
+    description: "Enhance your learning with audio lessons for various subjects.",
+    subjects: ["Mathematics", "Physics", "Chemistry", "Biology", "ICT"],
+    years: ["2019-2023", "2014-2018", "2009-2013", "2004-2008"],
+    features: ["High Quality Audio", "Downloadable", "Chapter Markers", "Speed Control"],
+    formats: ["MP3", "WAV", "Streaming"],
+    languages: ["English", "Sinhala", "Tamil"],
+    difficulty: ["Basic", "Intermediate", "Advanced"],
+    button: {
+      text: "View Category",
+      link: "/categories/4"
+    }
+  },
+  category5: {
+    categoryId: 5,
+    name: "Notes",
+    description: "Comprehensive notes for in-depth understanding of subjects.",
+    subjects: ["Mathematics", "Physics", "Chemistry", "Biology", "ICT"],
+    years: [""],
+    features: ["Detailed Explanations", "Practice Questions", "Quick References", "Summary Points"],
+    formats: ["PDF", "Word", "Interactive Digital"],
+    languages: ["English", "Sinhala", "Tamil"],
+    difficulty: ["Basic", "Intermediate", "Advanced"],
+    button: {
+      text: "View Category",
+      link: "/categories/5"
+    }
+  },
+  category6: {
+    categoryId: 6,
+    name: "Study Resources",
+    description: "Additional learning materials and study aids.",
+    subjects: ["Mathematics", "Physics", "Chemistry", "Biology", "ICT"],
+    years: ["2019-2023", "2014-2018", "2009-2013", "2004-2008"],
+    features: ["Interactive Tools", "Practice Sets", "Reference Materials", "Study Guides"],
+    formats: ["PDF", "Interactive", "Online Tools"],
+    languages: ["English", "Sinhala", "Tamil"],
+    difficulty: ["Basic", "Intermediate", "Advanced"],
+    button: {
+      text: "View Resources",
+      link: "/categories/6"
+    }
+  }
 }
+
 
 const users = {
     user1: {
