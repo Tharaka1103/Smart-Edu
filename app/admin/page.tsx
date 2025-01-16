@@ -6,7 +6,18 @@ import { BarChart3, Users, BookOpen, MessageSquare, Settings, LogOut } from 'luc
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { users, classes } from '../resources/content'
-
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+  } from "@/components/ui/alert-dialog"
+  
 export default function AdminDashboard() {
     const [selectedMenu, setSelectedMenu] = useState('overview')
     const router = useRouter()
@@ -61,11 +72,23 @@ export default function AdminDashboard() {
               <span>{item}</span>
             </button>
           ))}
-          
-          <Button className="w-full" variant={'destructive'} onClick={handleLogout}>
-            <LogOut size={20} />
-            <span>Logout</span>
-          </Button>
+            <AlertDialog>
+                <AlertDialogTrigger className='bg-red-700 w-full mt-4 py-3 rounded-lg transition-all hover:bg-red-900'>
+                    logout
+                </AlertDialogTrigger>
+                <AlertDialogContent className='bg-red-800/20'>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            This action cannot be undone. You will logout when click on Confirm.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={handleLogout} className='bg-red-700 text-white hover:bg-red-900'>Continue</AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </nav>
       </aside>
 
