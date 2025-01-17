@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { Users, BookOpen, MessageSquare, Settings, Bell, Edit3, Camera, Trash2, Eye, Banknote, ChevronRight, Globe, HelpCircle, Palette, Lock, X  } from 'lucide-react'
+import { Users, BookOpen, MessageSquare, Settings, Bell, Edit3, Camera, Trash2, Eye, Banknote, ChevronRight, Globe, HelpCircle, Palette, Lock, X, Leaf  } from 'lucide-react'
 import {
     AlertDialog,
     AlertDialogAction,
@@ -77,6 +77,10 @@ export default function UserProfile() {
                                 Grade {userData.grade} • {userData.school}
                                 </p>
                             </div>
+                            <Link href="/leaf" className="text-sm md:text-base text-muted-foreground hover:text-primary">
+                                <Leaf size={50} className='text-green-600' />
+                                View leaf
+                            </Link>
                             <div className="flex items-center gap-2">
                                     <AlertDialog>
                                         <AlertDialogTrigger className="flex text-sm items-center gap-2 bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-900 left-0 top-0">
